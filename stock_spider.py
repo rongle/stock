@@ -8,7 +8,8 @@ from threading import Timer
 from flask import Flask, render_template
 from lxml import etree
 import sys
-
+from middlewares import USER_AGENTS
+import random
 
 sys.setrecursionlimit(1000000) 
 
@@ -25,12 +26,9 @@ def connect_mysql():
 	return db, cursor
 
 def get_request(url, num_retries=20):
-	headers={
-	'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
-	}
 
 	try:
-		req = urllib.request.Request(url, headers=headers)
+		req = urllib.request.Request(url, headers={'User-Agent': random.sample(USER_AGENTS, 1)})
 		html = urllib.request.urlopen(req).read()
 	except urllib.error.URLError as e:
 		print('Request error:', e.reason)
