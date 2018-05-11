@@ -26,9 +26,8 @@ def connect_mysql():
 	return db, cursor
 
 def get_request(url, num_retries=20):
-
 	try:
-		req = urllib.request.Request(url, headers={'User-Agent': random.sample(USER_AGENTS, 1)})
+		req = urllib.request.Request(url, headers={'User-Agent': random.sample(USER_AGENTS, 1)[0]})
 		html = urllib.request.urlopen(req).read()
 	except urllib.error.URLError as e:
 		print('Request error:', e.reason)
