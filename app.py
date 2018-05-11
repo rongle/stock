@@ -37,4 +37,4 @@ def get_stockgrade():
 if(__name__ == '__main__'):
 	#get_stockgrade()
 	#print(query_stock())
-	app.run()
+	app.run(host='0.0.0.0', port=80)
